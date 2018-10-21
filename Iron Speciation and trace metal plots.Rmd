@@ -1,0 +1,37 @@
+---
+  title: "Iron Speciation and trace metal plots"
+author: "Beatrice Rodewald"
+date: "10/16/2018"
+output: 
+  pdf_document: default
+html_document: default
+word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::knit_hooks$set(inline = function(x) { knitr:::format_sci(x, 'md')})
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(ggplot2)
+library(tidyverse)
+```
+
+
+
+```{r diameter_hist, include=TRUE, message=FALSE}
+TF_data= read_xlsx('DV.Fossils.3.Oct.xlsx')
+png('avg_diameter_hist.png')
+avg_diameter_hist<-hist(TF_data$`Average diameter of fossils (mm)`,
+                        main="Average Burrow Diameter",
+                        xlab="Average Diameter (mm)",
+                        border="black",
+                        col="light blue",
+                        breaks=4
+)
+dev.off()
+print(avg_diameter_hist)
+
+```
+
+
+
