@@ -14,19 +14,26 @@ knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(ggplot2)
 library(tidyverse)
+library(car)
 ```
 
 
 
-```{r diameter_hist, include=TRUE, message=FALSE}
-TF_data= read_xlsx('DV.Fossils.3.Oct.xlsx')
+
+```{r anoxic_euxinic_plot, include=TRUE, message = FALSE}
+png('euxinia_square_plot.png')
+
+```
+
+
+```{r HR/Tot_dotplot, include=TRUE, message=FALSE}
+GSA_data= read_xlsx('Road_river_copy_GSA.csv')
 png('avg_diameter_hist.png')
-avg_diameter_hist<-hist(TF_data$`Average diameter of fossils (mm)`,
-                        main="Average Burrow Diameter",
-                        xlab="Average Diameter (mm)",
-                        border="black",
-                        col="light blue",
-                        breaks=4
+HR/Tot_dotplot<-scatterplot(GSA_Data$`FeHR/FeTot`,
+                        (FeHR/FeT ~ Depth | cyl, data=GSA_data, 
+  	xlab="Weight of Car", ylab="Miles Per Gallon", 
+   main="Enhanced Scatter Plot", 
+   labels=row.names(mtcars))
 )
 dev.off()
 print(avg_diameter_hist)
